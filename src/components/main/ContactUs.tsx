@@ -15,6 +15,7 @@ import {
 import { FaSquarePhone } from 'react-icons/fa6'
 import { buttonVariants } from '../ui/button'
 import { cn } from '@/lib/utils'
+import { site } from '@/config/site'
 
 interface FormData {
   name: string
@@ -135,31 +136,35 @@ const ContactUs: FC = () => {
               <div className="space-y-5 text-foreground">
                 <div className="flex items-center gap-3">
                   <FaEnvelope className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">hasanashab.18205@gmail.com</span>
+                  <span className="text-sm font-medium select-text">{site.email}</span>
                   <button
                     title="Copy email address"
-                    onClick={() => copyToClipboard('hasanashab.18205@gmail.com', 'Email')}
+                    type="button"
+                    onClick={() => copyToClipboard(site.email, 'Email')}
                     className="text-muted-foreground hover:text-primary transition"
                     aria-label="Copy email"
                   >
                     <FaRegCopy />
                   </button>
                 </div>
-                <div className="flex items-center gap-3">
-                  <FaSquarePhone className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">+880 16273 18919</span>
-                  <button
-                    title="Copy phone number"
-                    onClick={() => copyToClipboard('+880 16273 18919', 'Phone number')}
-                    className="text-muted-foreground hover:text-primary transition"
-                    aria-label="Copy phone number"
-                  >
-                    <FaRegCopy />
-                  </button>
-                </div>
+                {site.phone ? (
+                  <div className="flex items-center gap-3">
+                    <FaSquarePhone className="text-primary text-lg" />
+                    <span className="text-sm font-medium select-text">{site.phone}</span>
+                    <button
+                      title="Copy phone number"
+                      type="button"
+                      onClick={() => copyToClipboard(site.phone!, 'Phone number')}
+                      className="text-muted-foreground hover:text-primary transition"
+                      aria-label="Copy phone number"
+                    >
+                      <FaRegCopy />
+                    </button>
+                  </div>
+                ) : null}
                 <div className="flex items-center gap-3">
                   <FaMapMarkerAlt className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">Dhaka, Bangladesh</span>
+                  <span className="text-sm font-medium select-text">{site.location}</span>
                 </div>
               </div>
             </motion.div>

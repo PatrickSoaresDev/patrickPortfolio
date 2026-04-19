@@ -1,5 +1,6 @@
 export const runtime = 'edge'
 
+import { site } from '@/config/site'
 import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -55,7 +56,7 @@ export async function POST(req: Request) {
   try {
     const { error } = await resend.emails.send({
       from: `onboarding@resend.dev`,
-      to: ['hasanashab.18205@gmail.com'],
+      to: [site.email],
       replyTo: email,
       subject: sanitizedSubject,
       html: `
@@ -68,7 +69,7 @@ export async function POST(req: Request) {
     ${sanitizedMessage.replace(/\n/g, '<br />')}
   </blockquote>
   <hr />
-  <p style="font-size: 0.85rem; color: #666;">Sent via portfolio contact form on hasanashab.dev</p>
+  <p style="font-size: 0.85rem; color: #666;">Sent via portfolio contact form (${site.email})</p>
 `,
     })
 

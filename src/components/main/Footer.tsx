@@ -6,16 +6,17 @@ import { FC, useEffect, useState } from 'react'
 import { FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { RxGithubLogo } from 'react-icons/rx'
 import { TrackableElement, TrackableContact } from '@/components/analytics/TrackableElement'
+import { site } from '@/config/site'
 
 const Footer: FC = () => {
   const socialLinks = [
     {
-      href: 'https://github.com/HasanAshab',
+      href: site.githubUrl,
       icon: <RxGithubLogo className="w-5 h-5" />,
       label: 'GitHub',
     },
     {
-      href: 'https://www.linkedin.com/in/hasan-ashab/',
+      href: site.linkedinUrl,
       icon: <FaLinkedin className="w-5 h-5" />,
       label: 'LinkedIn',
     },
@@ -29,9 +30,9 @@ const Footer: FC = () => {
   ]
 
   const servicesLinks = [
-    { name: 'DevOps Engineer', href: '/devops-engineer' },
-    { name: 'Cloud Engineer', href: '/cloud-engineer' },
-    { name: 'DevOps Best Practices', href: '/blog/devops-best-practices' },
+    { name: 'Backend & APIs', href: '#skills' },
+    { name: 'Plataforma & entrega', href: '#skills' },
+    { name: 'Projetos públicos', href: '#projects' },
   ]
 
   const containerVariants = {
@@ -62,10 +63,11 @@ const Footer: FC = () => {
           animate="visible"
         >
           <motion.div className="space-y-4" variants={childVariants}>
-            <h1 title="Hasan Ashab" className="text-2xl font-extrabold bg-clip-text">Hasan Ashab</h1>
+            <h1 title={site.name} className="text-2xl font-extrabold bg-clip-text">
+              {site.name}
+            </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              DevOps & Cloud Engineer specializing in AWS, Kubernetes, Docker, and CI/CD automation. 
-              Building scalable infrastructure aligned with company requirements.
+              {site.role} — {site.description}
             </p>
           </motion.div>
 
@@ -91,8 +93,8 @@ const Footer: FC = () => {
           </motion.div>
 
           <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Services" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Services
+            <h2 title="Focus" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              Focus
             </h2>
             <ul className="space-y-2 text-sm">
               {servicesLinks.map((item) => (
@@ -133,7 +135,7 @@ const Footer: FC = () => {
             </div>
             <div className="mt-4">
               <p className="text-xs text-muted-foreground">
-                Keywords: DevOps Portfolio, Cloud Engineer, AWS, Kubernetes, Docker, CI/CD
+                Keywords: {site.keywords.slice(0, 8).join(', ')}
               </p>
             </div>
           </motion.div>

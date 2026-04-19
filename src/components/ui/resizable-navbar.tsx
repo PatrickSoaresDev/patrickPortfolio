@@ -1,5 +1,6 @@
 'use client'
 import { cn } from '@/lib/utils'
+import { site } from '@/config/site'
 import { IconMenu2, IconX } from '@tabler/icons-react'
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react'
 import Image from 'next/image'
@@ -260,14 +261,14 @@ export const NavbarLogo = ({ isScrolled }: { isScrolled: boolean }) => {
     >
       <Image
         src="/profile-pic.png"
-        alt="Hasan Ashab"
+        alt={site.name}
         width={32}
         height={32}
         className="rounded-full"
       />
       {!isScrolled && (
-        <span title="Hasan Ashab" className="text-lg font-bold group-hover:text-red-500 transition-colors">
-          Hasan Ashab
+        <span title={site.name} className="text-lg font-bold group-hover:text-red-500 transition-colors">
+          {site.name}
         </span>
       )}
     </a>
