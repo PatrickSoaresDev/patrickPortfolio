@@ -56,7 +56,9 @@ export async function POST(req: Request) {
   try {
     const { error } = await resend.emails.send({
       from: `onboarding@resend.dev`,
-      to: [site.email],
+      // Sandbox: with onboarding@resend.dev you can usually only deliver TO your Resend-account email
+      // until patricksoares.dev is verified in Resend. Override via CONTACT_INBOX_EMAIL in .env.local.
+      to: [process.env.CONTACT_INBOX_EMAIL ?? site.email],
       replyTo: email,
       subject: sanitizedSubject,
       html: `
@@ -75,7 +77,11 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error('Resend error:', error)
-      return new Response(JSON.stringify({ error: 'Failed to send email' }), { status: 500 })
+      const message =
+        typeof error === 'object' && error !== null && 'message' in error
+          ? String((error as { message: unknown }).message)
+          : 'Failed to send email'
+      return new Response(JSON.stringify({ error: message }), { status: 500 })
     }
 
     return new Response(JSON.stringify({ message: 'Message sent successfully' }), { status: 200 })

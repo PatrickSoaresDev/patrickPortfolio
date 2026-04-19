@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <rect width="32" height="32" rx="8" fill="#090d12"/>
+  <rect x="6" y="26" width="20" height="2" rx="1" fill="#2dd4bf" opacity="0.9"/>
+  <text
+    x="16"
+    y="20.5"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, 'Segoe UI', sans-serif"
+    font-size="12"
+    font-weight="700"
+    fill="#e8edf5"
+  >PS</text>
+</svg>

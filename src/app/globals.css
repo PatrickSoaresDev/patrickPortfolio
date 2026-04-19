@@ -262,6 +262,35 @@
   --sidebar-ring: oklch(0.72 0.14 172);
 }
 
+/* Fundo escuro — ShellAmbientBackground (terminal + IA, sem formas nítidas) */
+@keyframes shell-blob-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  45% {
+    transform: translate(6vw, -5vh) scale(1.06);
+  }
+  75% {
+    transform: translate(-4vw, 7vh) scale(0.96);
+  }
+}
+
+@keyframes shell-ai-glow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shell-amb-animate {
+    animation: none !important;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -273,10 +302,38 @@
   
   body {
     @apply bg-background text-foreground antialiased;
-    background-image: 
-      radial-gradient(circle at 25% 25%, oklch(var(--primary) / 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 75% 75%, oklch(var(--primary) / 0.03) 0%, transparent 50%);
+    /* Fundo próprio: grelha discreta + “mesh” em 3 elipses (menos genérico que 2 círculos nos cantos) */
+    background-image:
+      linear-gradient(oklch(var(--foreground) / 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(var(--foreground) / 0.04) 1px, transparent 1px),
+      radial-gradient(
+        ellipse 100% 80% at 50% -30%,
+        oklch(var(--primary) / 0.14) 0%,
+        transparent 55%
+      ),
+      radial-gradient(
+        ellipse 70% 60% at 100% 60%,
+        oklch(var(--primary) / 0.07) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        ellipse 55% 50% at 0% 85%,
+        oklch(var(--muted-foreground) / 0.06) 0%,
+        transparent 45%
+      );
+    background-size:
+      40px 40px,
+      40px 40px,
+      auto,
+      auto,
+      auto;
+    background-attachment: scroll;
     min-height: 100vh;
+  }
+
+  /* Tema escuro: base sólida — atmosfera em ShellAmbientBackground */
+  .dark body {
+    background-image: none;
   }
 
   /* Modern Focus Styles */

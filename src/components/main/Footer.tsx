@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 import { FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { RxGithubLogo } from 'react-icons/rx'
-import { TrackableElement, TrackableContact } from '@/components/analytics/TrackableElement'
 import { site } from '@/config/site'
 import { useLocale } from '@/contexts/LocaleContext'
 
@@ -65,12 +64,24 @@ const Footer: FC = () => {
           animate="visible"
         >
           <motion.div className="space-y-4" variants={childVariants}>
-            <h1 title={site.name} className="text-2xl font-extrabold bg-clip-text">
-              {site.name}
-            </h1>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              {t.site.role} — {t.site.description}
-            </p>
+            <div className="flex items-start gap-3">
+              <img
+                src="/ps-logo.svg"
+                alt=""
+                width={40}
+                height={40}
+                className="h-10 w-10 shrink-0 rounded-lg border border-border/60 shadow-sm"
+                aria-hidden
+              />
+              <div className="min-w-0 space-y-1">
+                <h1 title={site.name} className="text-2xl font-extrabold bg-clip-text">
+                  {site.name}
+                </h1>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {t.site.role} — {t.site.description}
+                </p>
+              </div>
+            </div>
           </motion.div>
 
           <motion.div className="space-y-4" variants={childVariants}>
@@ -80,15 +91,13 @@ const Footer: FC = () => {
             <ul className="space-y-2 text-sm">
               {quickLinks.map((item) => (
                 <li key={item.name}>
-                  <TrackableElement elementId={`footer-nav-${item.name.toLowerCase()}`} elementText={`Footer: ${item.name}`}>
-                    <a
-                      href={item.href}
-                      className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
-                      aria-label={`Navigate to ${item.name} section`}
-                    >
-                      {item.name}
-                    </a>
-                  </TrackableElement>
+                  <a
+                    href={item.href}
+                    className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+                    aria-label={`Navigate to ${item.name} section`}
+                  >
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -101,15 +110,13 @@ const Footer: FC = () => {
             <ul className="space-y-2 text-sm">
               {servicesLinks.map((item) => (
                 <li key={item.name}>
-                  <TrackableElement elementId={`footer-service-${item.name.toLowerCase().replace(/\s+/g, '-')}`} elementText={`Service: ${item.name}`}>
-                    <a
-                      href={item.href}
-                      className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
-                      aria-label={`Learn about ${item.name}`}
-                    >
-                      {item.name}
-                    </a>
-                  </TrackableElement>
+                  <a
+                    href={item.href}
+                    className="hover:text-primary transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-primary"
+                    aria-label={`Learn about ${item.name}`}
+                  >
+                    {item.name}
+                  </a>
                 </li>
               ))}
             </ul>
@@ -121,18 +128,17 @@ const Footer: FC = () => {
             </h2>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link) => (
-                <TrackableContact key={link.label} method={`footer-${link.label.toLowerCase()}`}>
-                  <motion.a
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-muted rounded-full hover:bg-gradient-to-r hover:from-teal-500 hover:to-emerald-500 hover:text-white transition-all duration-300"
-                    whileHover={{ scale: 1.2, rotate: 5 }}
-                    aria-label={`Visit my ${link.label} profile`}
-                  >
-                    {link.icon}
-                  </motion.a>
-                </TrackableContact>
+                <motion.a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-muted rounded-full hover:bg-gradient-to-r hover:from-teal-500 hover:to-emerald-500 hover:text-white transition-all duration-300"
+                  whileHover={{ scale: 1.2, rotate: 5 }}
+                  aria-label={`Visit my ${link.label} profile`}
+                >
+                  {link.icon}
+                </motion.a>
               ))}
             </div>
             <div className="mt-4">

@@ -3,14 +3,11 @@ import { motion } from 'framer-motion'
 import { FaGithub, FaLinkedin, FaRocket } from 'react-icons/fa'
 import { FC, useState, useEffect } from 'react'
 import { NavbarButton } from '../ui/resizable-navbar'
-import { TrackableContact } from '@/components/analytics/TrackableElement'
-import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider'
 import { site } from '@/config/site'
 import { useLocale } from '@/contexts/LocaleContext'
 
 const HeroContent: FC = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const { trackClick } = useAnalyticsContext()
   const { t } = useLocale()
 
   useEffect(() => {
@@ -145,27 +142,23 @@ const HeroContent: FC = () => {
         </NavbarButton>
 
         <div className="flex items-center gap-3">
-          <TrackableContact method="github">
-            <NavbarButton
-              title={t.hero.visitGithub}
-              variant="secondary"
-              className="group bg-card/60 backdrop-blur-sm border-primary/30 hover:border-primary/60 hover:bg-primary/10 px-6 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
-              href={site.githubUrl}
-            >
-              <FaGithub className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-            </NavbarButton>
-          </TrackableContact>
+          <NavbarButton
+            title={t.hero.visitGithub}
+            variant="secondary"
+            className="group bg-card/60 backdrop-blur-sm border-primary/30 hover:border-primary/60 hover:bg-primary/10 px-6 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+            href={site.githubUrl}
+          >
+            <FaGithub className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+          </NavbarButton>
 
-          <TrackableContact method="linkedin">
-            <NavbarButton
-              title={t.hero.visitLinkedin}
-              variant="secondary"
-              className="group bg-card/60 backdrop-blur-sm border-teal-500/30 hover:border-teal-500/60 hover:bg-teal-500/10 px-6 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
-              href={site.linkedinUrl}
-            >
-              <FaLinkedin title={t.hero.visitLinkedin} className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-            </NavbarButton>
-          </TrackableContact>
+          <NavbarButton
+            title={t.hero.visitLinkedin}
+            variant="secondary"
+            className="group bg-card/60 backdrop-blur-sm border-teal-500/30 hover:border-teal-500/60 hover:bg-teal-500/10 px-6 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg"
+            href={site.linkedinUrl}
+          >
+            <FaLinkedin title={t.hero.visitLinkedin} className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+          </NavbarButton>
         </div>
       </motion.div>
 

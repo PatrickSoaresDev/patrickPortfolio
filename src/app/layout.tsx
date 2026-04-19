@@ -1,11 +1,10 @@
-import { Analytics } from '@vercel/analytics/next'
 import Footer from '@/components/main/Footer'
 import { Navbar } from '@/components/main/Navbar'
 import { ThemeProvider } from '@/components/theme-provider'
-import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { ShellAmbientBackground } from '@/components/ui/ShellAmbientBackground'
 import { LocaleProvider } from '@/contexts/LocaleContext'
 import { site, siteUrl } from '@/config/site'
 import { translations } from '@/config/translations'
@@ -20,10 +19,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-const seo = translations.pt.site
+const seo = translations.en.site
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${seo.role} | ${seo.portfolioSuffix}`,
+  title: seo.role,
   description: seo.description,
   keywords: [...site.keywords],
   authors: [{ name: site.name }],
@@ -42,7 +41,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'pt_BR',
+    locale: 'en_US',
     url: siteUrl,
     title: `${site.name} — ${seo.role}`,
     description: seo.description,
@@ -59,6 +58,10 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteUrl,
   },
+  icons: {
+    icon: [{ url: '/ps-logo.svg', type: 'image/svg+xml' }],
+    shortcut: '/ps-logo.svg',
+  },
 }
 
 export default function RootLayout({
@@ -73,7 +76,7 @@ export default function RootLayout({
     jobTitle: seo.role,
     description: seo.description,
     url: siteUrl,
-    image: `${siteUrl}/profile-pic.jpg`,
+    image: `${siteUrl}/profile-pic.png`,
     sameAs: [site.githubUrl, site.linkedinUrl],
     knowsAbout: [
       'Backend development',
@@ -89,7 +92,7 @@ export default function RootLayout({
   }
 
   return (
-    <html lang="pt-BR" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -101,22 +104,24 @@ export default function RootLayout({
         <meta name="theme-color" content="#115e59" media="(prefers-color-scheme: dark)" />
         <meta name="color-scheme" content="light dark" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} relative isolate antialiased overflow-x-hidden`}
+      >
+        <ShellAmbientBackground />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <LocaleProvider>
-            <AnalyticsProvider>
+          <div className="relative z-[1] flex min-h-screen flex-col">
+            <LocaleProvider>
               <Navbar />
               <main role="main">{children}</main>
               <Footer />
-            </AnalyticsProvider>
-          </LocaleProvider>
+            </LocaleProvider>
+          </div>
         </ThemeProvider>
-        <Analytics />
       </body>
     </html>
   )

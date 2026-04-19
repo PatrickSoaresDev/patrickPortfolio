@@ -8,8 +8,8 @@ export async function POST(request: NextRequest) {
     const authHeader = request.headers.get('authorization');
     const token = authHeader?.replace('Bearer ', '');
     
-    // Simple token validation (using same token as analytics)
-    const ADMIN_TOKEN = process.env.ANALYTICS_ADMIN_TOKEN;
+    const ADMIN_TOKEN =
+      process.env.PORTFOLIO_ADMIN_TOKEN ?? process.env.ANALYTICS_ADMIN_TOKEN;
     
     if (!token || token !== ADMIN_TOKEN) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });

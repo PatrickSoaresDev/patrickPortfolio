@@ -1,6 +1,6 @@
 export type Locale = "pt" | "en";
 
-export const defaultLocale: Locale = "pt";
+export const defaultLocale: Locale = "en";
 
 export const LOCALE_STORAGE_KEY = "patrick-portfolio-locale";
 
@@ -22,6 +22,7 @@ export type Translations = {
     portfolioSuffix: string;
   };
   nav: {
+    home: string;
     about: string;
     skills: string;
     experience: string;
@@ -33,6 +34,10 @@ export type Translations = {
     scroll: string;
     visitGithub: string;
     visitLinkedin: string;
+  };
+  about: {
+    title: string;
+    body: string;
   };
   skills: {
     title: string;
@@ -108,12 +113,13 @@ const pt: Translations = {
   site: {
     role: "Engenheiro de Backend",
     roleSubtitle:
-      "Especialista em arquitetura de sistemas distribuídos e plataformas de alta criticidade.",
+      "Especializado em arquitetura de sistemas distribuídos e evolução de plataformas de alta criticidade.",
     description:
-      "Engenheiro de backend — sistemas distribuídos, plataformas críticas, Java, Node.js, cloud e CI/CD.",
+      "Engenheiro de backend — sistemas distribuídos, plataformas críticas, Java, TypeScript, Node.js, cloud e CI/CD.",
     portfolioSuffix: "Portfólio",
   },
   nav: {
+    home: "Início",
     about: "Sobre",
     skills: "Competências",
     experience: "Experiência",
@@ -125,6 +131,10 @@ const pt: Translations = {
     scroll: "Rolar para explorar",
     visitGithub: "Ver perfil no GitHub",
     visitLinkedin: "Ver perfil no LinkedIn",
+  },
+  about: {
+    title: "Sobre mim",
+    body: "Profissional com mais de 5 anos de experiência no desenvolvimento de aplicações em escala global, com atuação sólida em arquitetura de software, segurança, alta disponibilidade e escalabilidade. Tenho como foco principal a compreensão profunda dos requisitos de negócio, garantindo a entrega de soluções robustas, eficientes e sustentáveis a longo prazo.",
   },
   skills: {
     title: "Competências técnicas",
@@ -256,14 +266,15 @@ const pt: Translations = {
 
 const en: Translations = {
   site: {
-    role: "Backend Engineer & Tech Lead",
+    role: "Backend Engineer",
     roleSubtitle:
       "Specializing in distributed systems architecture and high-criticality platforms.",
     description:
-      "Backend engineer — distributed systems, high-criticality platforms, Java, Node.js, cloud & CI/CD.",
+      "Backend engineer — distributed systems, high-criticality platforms, Java, TypeScript, Node.js, cloud & CI/CD.",
     portfolioSuffix: "Portfolio",
   },
   nav: {
+    home: "Home",
     about: "About",
     skills: "Skills",
     experience: "Experience",
@@ -275,6 +286,10 @@ const en: Translations = {
     scroll: "Scroll to explore",
     visitGithub: "Visit GitHub profile",
     visitLinkedin: "Visit LinkedIn profile",
+  },
+  about: {
+    title: "About me",
+    body: "Professional with over 5 years of experience developing applications at global scale, with solid expertise in software architecture, security, high availability, and scalability. I focus on deeply understanding business requirements to deliver robust, efficient, and sustainable solutions over the long term.",
   },
   skills: {
     title: "Technical skills",

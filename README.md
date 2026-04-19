@@ -1,207 +1,108 @@
-
-# Hasan Ashab - DevOps & Cloud Engineer Portfolio
+# Patrick Soares — Portfolio
 
 [![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Vercel](https://img.shields.io/badge/Deployed_on-Vercel-000000?style=flat-square&logo=vercel)](https://vercel.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 
-> Professional portfolio website showcasing DevOps and Cloud Engineering expertise, built with modern web technologies and optimized for performance and SEO.
+Personal site focused on **backend engineering**, technical leadership, and a modern stack (Next.js, TypeScript, Tailwind). It includes hero, about, skills, experience, GitHub projects, and a contact form.
 
-## 🚀 Live Demo
+## Live demo
 
-Visit the live portfolio: [https://hasan-ashab.vercel.app](https://hasan-ashab.vercel.app)
+- **Production:** [patricksoares.dev](https://www.patricksoares.dev/)
 
-## 👨‍💻 About Me
+## About
 
-I'm **Hasan Ashab**, a passionate **DevOps Engineer** and **Cloud Specialist** with expertise in:
+**Patrick Soares** — backend engineer with experience in distributed systems, APIs, Javascript, Node.js, cloud, and CI/CD. Site copy is available in **Portuguese** and **English** (toggle in the header).
 
-- ☁️ **Cloud Platforms**: AWS, Azure, Google Cloud Platform
-- 🐳 **Containerization**: Docker, Kubernetes, Helm
-- 🔄 **CI/CD**: Jenkins, GitHub Actions, GitLab CI/CD
-- 🏗️ **Infrastructure as Code**: Terraform, Ansible, CloudFormation
-- 📊 **Monitoring**: Prometheus, Grafana, ELK Stack
-- 🔒 **Security**: DevSecOps, Container Security, Compliance
+## Tech stack
 
-## 🛠️ Tech Stack
+| Area            | Technologies                                                                 |
+| --------------- | ---------------------------------------------------------------------------- |
+| Framework       | Next.js 15 (App Router), React 19                                            |
+| Language        | TypeScript                                                                   |
+| Styling         | Tailwind CSS 4                                                               |
+| UI              | Radix UI, shared components (`components/ui`)                                |
+| Animation       | Framer Motion / Motion                                                       |
+| Email (contact) | Resend (API route `/api/contact`)                                            |
+| Deploy          | Vercel-friendly; optional Cloudflare Pages scripts (`pages:build`, Wrangler) |
 
-### Frontend
-- **Framework**: Next.js 15.3.3 with App Router
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS 4.0
-- **UI Components**: Radix UI, ShadCN UI
-- **Animations**: Framer Motion
-- **Icons**: React Icons, Tabler Icons, Heroicons
+## Features
 
-### Development & Deployment
-- **Package Manager**: npm
-- **Deployment**: Vercel (with Cloudflare Pages support)
-- **Analytics**: Vercel Analytics
-- **Linting**: ESLint, Stylelint
-- **Type Checking**: TypeScript
+- SEO: metadata, Open Graph, JSON-LD, `sitemap.ts`, `robots.ts`
+- Light / dark / system theme (`next-themes`)
+- Internationalization (PT · EN) via locale context
+- GitHub pinned repos section (optional: `GITHUB_TOKEN` in `.env.local`)
+- Extra static pages: `/cloud-engineer`, `/devops-engineer`
 
-### DevOps & Cloud Tools Featured
-- **AWS Services**: EC2, ECS, EKS, Lambda, S3, RDS, CloudWatch
-- **Containerization**: Docker, Kubernetes
-- **CI/CD**: Jenkins, GitHub Actions
-- **Infrastructure**: Terraform, Ansible
-- **Monitoring**: Prometheus, Grafana
-
-## 🎯 Features
-
-### 🔍 SEO Optimized
-- Comprehensive meta tags and Open Graph data
-- Structured data (JSON-LD) for better search engine understanding
-- Optimized sitemap and robots.txt
-- Semantic HTML structure
-- Fast loading times and Core Web Vitals optimization
-
-### 📱 Responsive Design
-- Mobile-first approach
-- Optimized for all device sizes
-- Touch-friendly navigation
-- Progressive Web App features
-
-### ⚡ Performance
-- Server-side rendering (SSR)
-- Image optimization with Next.js Image component
-- Code splitting and lazy loading
-- Optimized bundle size
-
-### 🎨 Modern UI/UX
-- Dark/Light theme toggle
-- Smooth animations and transitions
-- Interactive components
-- Accessible design (WCAG compliant)
-
-## 📁 Project Structure
+## Project structure (overview)
 
 ```
 src/
-├── app/                          # Next.js App Router
-│   ├── layout.tsx               # Root layout with SEO metadata
-│   ├── page.tsx                 # Homepage
-│   ├── sitemap.ts              # Dynamic sitemap generation
-│   ├── robots.ts               # Robots.txt configuration
-│   ├── devops-engineer/        # DevOps engineer page
-│   ├── cloud-engineer/         # Cloud engineer page
-│   └── blog/                   # Blog posts
-├── components/                  # React components
-│   ├── main/                   # Main page sections
-│   ├── sub/                    # Sub-components
-│   └── ui/                     # Reusable UI components
-└── utils/                      # Utility functions
+├── app/                 # App Router routes, layout, API (contact, resume)
+├── components/
+│   ├── main/            # Hero, About, Skills, Timeline, Projects, Contact, Footer, Navbar
+│   ├── sub/             # Hero content and other blocks
+│   └── ui/              # Shared UI primitives
+├── config/              # site.ts, translations, project cover images
+├── contexts/            # Locale (language)
+└── lib/                 # Utilities (e.g. GitHub repos)
 ```
 
-## 🚀 Getting Started
+## Local development
 
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
+**Requirements:** Node.js 18+
 
-### Installation
+```bash
+git clone <your-repo-url>
+cd patrick-portfolio
+npm install
+```
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/HasanAshab/portfolio.git
-   cd portfolio
-   ```
+Create `.env.local` with the variables you need, for example:
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
+- `NEXT_PUBLIC_SITE_URL` — canonical URL (e.g. `http://localhost:3000` in dev)
+- `RESEND_API_KEY` — required for the contact form to send email
+- `GITHUB_TOKEN` — optional, to list pinned repositories in the projects section
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env.local
-   ```
-   Fill in your environment variables in `.env.local`
+```bash
+npm run dev
+```
 
-4. **Run the development server**
-   ```bash
-   npm run dev
-   ```
+Open [http://localhost:3000](http://localhost:3000).
 
-5. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
-### Build for Production
+### Production build
 
 ```bash
 npm run build
 npm start
 ```
 
-### Deploy to Vercel
+## Useful scripts
 
-```bash
-npm run deploy
-```
+| Command               | Description               |
+| --------------------- | ------------------------- |
+| `npm run dev`         | Dev server (Turbopack)    |
+| `npm run dev:webpack` | Dev with webpack          |
+| `npm run clean`       | Remove the `.next` folder |
+| `npm run lint`        | ESLint                    |
 
-## 🔧 Configuration
+## License
 
-### SEO Configuration
-The portfolio is optimized for search engines with:
-- Meta tags in `src/app/layout.tsx`
-- Structured data for better search results
-- Optimized images and performance
-- Semantic HTML structure
+See [LICENSE](LICENSE) (MIT unless stated otherwise in this repository).
 
-### Analytics
-Vercel Analytics is integrated for performance monitoring and user insights.
+## Contact
 
-### Theme Configuration
-The portfolio supports both light and dark themes with system preference detection.
-
-## 📊 SEO Keywords
-
-This portfolio is optimized for the following search terms:
-- DevOps Portfolio
-- Cloud Engineer Portfolio
-- DevOps Engineer
-- Cloud Engineer
-- Hasan Ashab
-- Hasan Ashab Portfolio
-- Portfolio Website
-- AWS DevOps
-- Kubernetes Engineer
-- Docker Specialist
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 📞 Contact
-
-**Hasan Ashab** - DevOps & Cloud Engineer
-
-- 🌐 Website: [https://hasan-ashab.vercel.app](https://hasan-ashab.vercel.app)
-- 💼 LinkedIn: [https://linkedin.com/in/hasanashab](https://linkedin.com/in/hasanashab)
-- 🐙 GitHub: [https://github.com/HasanAshab](https://github.com/HasanAshab)
-- 📧 Email: [contact@hasanashab.dev](mailto:contact@hasanashab.dev)
-
-## 🙏 Acknowledgements
-
-This project is a fork of [Ashlok Chaudhary](https://github.com/ashlok2003)'s portfolio. All credits goes to him for the initial design and structure.
-
-### Additional Resources
-- [Next.js Documentation](https://nextjs.org/docs)
-- [Tailwind CSS Documentation](https://tailwindcss.com/docs)
-- [Vercel Deployment Guide](https://vercel.com/docs)
-- [AWS Documentation](https://docs.aws.amazon.com/)
-- [Kubernetes Documentation](https://kubernetes.io/docs/)
+- **Website:** [patricksoares.dev](https://www.patricksoares.dev/)
+- **GitHub:** [@PatrickSoaresDev](https://github.com/PatrickSoaresDev)
+- **LinkedIn:** [patricksoaresdev](https://www.linkedin.com/in/patricksoaresdev/)
+- **Email:** contact@patricksoares.dev
 
 ---
 
-⭐ **Star this repository if you found it helpful!**
+## Credits & fork chain
+
+This repository was **adapted from [Hasan Ashab](https://github.com/HasanAshab)**’s portfolio (`HasanAshab/portfolio`), which provided the initial layout, sections, and part of the project structure.
+
+In **Hasan’s own repository**, he **already credits** his project as a fork / derivative of **[Ashlok Chaudhary](https://github.com/ashlok2003)**’s work — so the inspiration chain is: **Ashlok Chaudhary → Hasan Ashab → Patrick Soares** (this version).
+
+Thanks to both for sharing their work as open source.

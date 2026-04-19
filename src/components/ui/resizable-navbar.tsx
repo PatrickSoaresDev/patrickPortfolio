@@ -6,6 +6,7 @@ import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/
 import Image from 'next/image'
 
 import React, { JSX, useRef, useState } from 'react'
+import { useLocale } from '@/contexts/LocaleContext'
 
 interface NavbarProps {
   children: React.ReactNode
@@ -128,24 +129,6 @@ export const NavItems = ({ items, className, isScrolled, onItemClick }: NavItems
           onClick={(e) => {
             e.preventDefault()
             onItemClick?.()
-            
-            // Track navigation click
-            if (typeof window !== 'undefined') {
-              fetch('/api/analytics/track', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  event_type: 'clicked',
-                  element_id: `nav-${item.name.toLowerCase()}`,
-                  element_text: `Nav: ${item.name}`,
-                  page_path: window.location.pathname,
-                  user_agent: navigator.userAgent,
-                  session_id: sessionStorage.getItem('analytics_session_id') || `session_${Date.now()}`,
-                  timestamp: new Date().toISOString(),
-                }),
-              }).catch(console.error);
-            }
-            
             document.getElementById(item.link.slice(1))?.scrollIntoView({ behavior: 'smooth' })
           }}
           key={`link-${item.name}`}
@@ -252,12 +235,13 @@ export const MobileNavToggle = ({
 }
 
 export const NavbarLogo = ({ isScrolled }: { isScrolled: boolean }) => {
+  const { t } = useLocale()
   return (
     <a
-      title="Navigate to About section"
-      href="#about"
+      title={t.nav.home}
+      href="#hero"
       className="group flex items-center space-x-3"
-      aria-label="Navigate to About section"
+      aria-label={t.nav.home}
     >
       <Image
         src="/profile-pic.png"

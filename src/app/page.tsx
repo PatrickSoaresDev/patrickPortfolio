@@ -1,3 +1,4 @@
+import About from '@/components/main/About'
 import ContactUs from '@/components/main/ContactUs'
 import Hero from '@/components/main/Hero'
 import Projects from '@/components/main/Projects'
@@ -6,17 +7,14 @@ import Skills from '@/components/main/Skills'
 import Timeline from '@/components/main/Timeline'
 import { Toaster } from 'react-hot-toast'
 import { Metadata } from 'next'
-import CertificationsSection from '@/components/main/Certifications'
-import { AnalyticsDebug } from '@/components/analytics/AnalyticsDebug'
-import InteractiveWrapper from '@/components/main/InteractiveWrapper'
 
 import { site, siteUrl } from '@/config/site'
 import { translations } from '@/config/translations'
 
-const seo = translations.pt.site
+const seo = translations.en.site
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${seo.role} | ${seo.portfolioSuffix}`,
+  title: seo.role,
   description: seo.description,
   alternates: {
     canonical: siteUrl,
@@ -42,18 +40,14 @@ export default async function Home() {
         <p>{seo.description}</p>
       </div>
 
-      <InteractiveWrapper>
-        <Hero />
-        <Skills />
-        <Timeline />
-        {/* <CertificationsSection /> */}
-        <Projects repos={repos} hasGithubToken={hasGithubToken} />
-        <ContactUs />
-        <Toaster position="bottom-right" />
-      </InteractiveWrapper>
-      
-      {/* Temporary test components for analytics - remove in production */}
-      {/* <AnalyticsDebug /> */}
+      <Hero />
+      <About />
+      <Skills />
+      <Timeline />
+      {/* <CertificationsSection /> */}
+      <Projects repos={repos} hasGithubToken={hasGithubToken} />
+      <ContactUs />
+      <Toaster position="bottom-right" />
     </div>
   )
 }

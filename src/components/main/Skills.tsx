@@ -54,22 +54,6 @@ const Skills = () => {
       className="relative flex flex-col items-center justify-center gap-12 py-20 px-4 sm:px-8 min-h-[600px] overflow-hidden"
       aria-labelledby="skills-heading"
     >
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        {/* Floating Geometric Shapes */}
-        <div className="absolute top-20 left-10 w-24 h-24 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-teal-500/20 rounded-lg rotate-45 animate-bounce"></div>
-        <div className="absolute bottom-32 left-1/4 w-12 h-12 bg-primary/15 rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 right-1/3 w-20 h-20 bg-teal-400/10 rounded-lg rotate-12 float-animation"></div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-gradient-to-r from-primary/20 via-teal-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-60 h-60 bg-gradient-to-l from-teal-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
-      </div>
-
       <motion.div 
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

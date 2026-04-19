@@ -1,9 +1,12 @@
-'use client'
+"use client";
 
-import { Variants, motion } from 'framer-motion'
-import { MessageCircle } from 'lucide-react'
-import { FC, FormEvent, useState } from 'react'
-import toast from 'react-hot-toast'
+import { site } from "@/config/site";
+import { useLocale } from "@/contexts/LocaleContext";
+import { cn } from "@/lib/utils";
+import { Variants, motion } from "framer-motion";
+import { MessageCircle } from "lucide-react";
+import { FC, FormEvent, useState } from "react";
+import toast from "react-hot-toast";
 import {
   FaEnvelope,
   FaMapMarkerAlt,
@@ -11,65 +14,63 @@ import {
   FaRegCopy,
   FaSpinner,
   FaUser,
-} from 'react-icons/fa'
-import { FaSquarePhone } from 'react-icons/fa6'
-import { buttonVariants } from '../ui/button'
-import { cn } from '@/lib/utils'
-import { site } from '@/config/site'
-import { useLocale } from '@/contexts/LocaleContext'
+} from "react-icons/fa";
+import { FaSquarePhone } from "react-icons/fa6";
+import { buttonVariants } from "../ui/button";
 
 interface FormData {
-  name: string
-  email: string
-  subject: string
-  message: string
+  name: string;
+  email: string;
+  subject: string;
+  message: string;
 }
 
 const ContactUs: FC = () => {
-  const { t } = useLocale()
+  const { t } = useLocale();
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
-  const [status, setStatus] = useState('')
-  const [isSubmitting, setIsSubmitting] = useState(false)
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
-  }
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-    setStatus('')
-
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus("");
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
+      });
 
       if (response.ok) {
-        setStatus(t.contact.success)
-        setFormData({ name: '', email: '', subject: '', message: '' })
+        setStatus(t.contact.success);
+        setFormData({ name: "", email: "", subject: "", message: "" });
       } else {
-        setStatus(t.contact.fail)
+        setStatus(t.contact.fail);
       }
     } catch {
-      setStatus(t.contact.error)
+      setStatus(t.contact.error);
     } finally {
-      setIsSubmitting(false)
-      setTimeout(() => setStatus(''), 5000)
+      setIsSubmitting(false);
+      setTimeout(() => setStatus(""), 5000);
     }
-  }
+  };
 
   const copyToClipboard = (text: string, label: string) => {
-    navigator.clipboard.writeText(text)
-    toast.success(t.contact.copied(label))
-  }
+    navigator.clipboard.writeText(text);
+    toast.success(t.contact.copied(label));
+  };
 
   const cardVariants: Variants = {
     hidden: { opacity: 0, y: 50, scale: 0.95 },
@@ -77,13 +78,13 @@ const ContactUs: FC = () => {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, ease: 'easeOut' },
+      transition: { duration: 0.6, ease: "easeOut" },
     },
     hover: {
       scale: 1.02,
       transition: { duration: 0.3 },
     },
-  }
+  };
 
   const inputVariants: Variants = {
     hidden: { opacity: 0, x: -20 },
@@ -92,26 +93,13 @@ const ContactUs: FC = () => {
       x: 0,
       transition: { duration: 0.4, delay: i * 0.1 },
     }),
-  }
+  };
 
   return (
-    <section id="contact" className="relative py-20 bg-background text-foreground transition-colors overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        {/* Floating Geometric Shapes */}
-        <div className="absolute top-20 left-12 w-32 h-32 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-60 right-16 w-20 h-20 bg-teal-500/20 rounded-lg rotate-45 animate-bounce"></div>
-        <div className="absolute bottom-40 left-1/3 w-16 h-16 bg-primary/15 rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 right-1/4 w-24 h-24 bg-teal-400/10 rounded-lg rotate-12 float-animation"></div>
-        
-        {/* Grid Pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        
-        {/* Gradient Orbs */}
-        <div className="absolute top-1/4 right-1/2 translate-x-1/2 w-96 h-96 bg-gradient-to-r from-primary/20 via-teal-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-l from-teal-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
-      </div>
-
+    <section
+      id="contact"
+      className="relative py-20 text-foreground transition-colors overflow-hidden"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="max-w-7xl mx-auto bg-card/60 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 sm:p-10 shadow-2xl"
@@ -137,7 +125,9 @@ const ContactUs: FC = () => {
               <div className="space-y-5 text-foreground">
                 <div className="flex items-center gap-3">
                   <FaEnvelope className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">{site.email}</span>
+                  <span className="text-sm font-medium select-text">
+                    {site.email}
+                  </span>
                   <button
                     title={t.contact.copyEmail}
                     type="button"
@@ -151,11 +141,15 @@ const ContactUs: FC = () => {
                 {site.phone ? (
                   <div className="flex items-center gap-3">
                     <FaSquarePhone className="text-primary text-lg" />
-                    <span className="text-sm font-medium select-text">{site.phone}</span>
+                    <span className="text-sm font-medium select-text">
+                      {site.phone}
+                    </span>
                     <button
                       title={t.contact.copyPhone}
                       type="button"
-                      onClick={() => copyToClipboard(site.phone!, t.contact.phone)}
+                      onClick={() =>
+                        copyToClipboard(site.phone!, t.contact.phone)
+                      }
                       className="text-muted-foreground hover:text-primary transition"
                       aria-label={t.contact.copyPhone}
                     >
@@ -165,7 +159,9 @@ const ContactUs: FC = () => {
                 ) : null}
                 <div className="flex items-center gap-3">
                   <FaMapMarkerAlt className="text-primary text-lg" />
-                  <span className="text-sm font-medium select-text">{site.location}</span>
+                  <span className="text-sm font-medium select-text">
+                    {site.location}
+                  </span>
                 </div>
               </div>
             </motion.div>
@@ -176,8 +172,17 @@ const ContactUs: FC = () => {
               initial="hidden"
               animate="visible"
             >
-              <form onSubmit={handleSubmit} className="space-y-5" aria-label={t.contact.title}>
-                <motion.div custom={0} variants={inputVariants} initial="hidden" animate="visible">
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-5"
+                aria-label={t.contact.title}
+              >
+                <motion.div
+                  custom={0}
+                  variants={inputVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   <div className="relative">
                     <FaUser className="absolute top-3.5 left-3 text-muted-foreground" />
                     <input
@@ -192,7 +197,12 @@ const ContactUs: FC = () => {
                     />
                   </div>
                 </motion.div>
-                <motion.div custom={1} variants={inputVariants} initial="hidden" animate="visible">
+                <motion.div
+                  custom={1}
+                  variants={inputVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   <div className="relative">
                     <FaEnvelope className="absolute top-3.5 left-3 text-muted-foreground" />
                     <input
@@ -207,7 +217,12 @@ const ContactUs: FC = () => {
                     />
                   </div>
                 </motion.div>
-                <motion.div custom={2} variants={inputVariants} initial="hidden" animate="visible">
+                <motion.div
+                  custom={2}
+                  variants={inputVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   <div className="relative">
                     <MessageCircle className="absolute top-3.5 left-3 text-muted-foreground" />
                     <input
@@ -222,7 +237,12 @@ const ContactUs: FC = () => {
                     />
                   </div>
                 </motion.div>
-                <motion.div custom={3} variants={inputVariants} initial="hidden" animate="visible">
+                <motion.div
+                  custom={3}
+                  variants={inputVariants}
+                  initial="hidden"
+                  animate="visible"
+                >
                   <textarea
                     name="message"
                     value={formData.message}
@@ -239,7 +259,7 @@ const ContactUs: FC = () => {
                   className={cn(
                     buttonVariants({
                       className:
-                        'w-full py-3 rounded-none flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed',
+                        "w-full py-3 rounded-none flex items-center justify-center gap-2 transition-all disabled:opacity-50 disabled:cursor-not-allowed",
                     }),
                   )}
                   whileHover={{ scale: 1.05 }}
@@ -259,7 +279,9 @@ const ContactUs: FC = () => {
                 {status && (
                   <motion.p
                     className={`text-center text-sm ${
-                      status === t.contact.success ? 'text-green-500' : 'text-red-500'
+                      status === t.contact.success
+                        ? "text-green-500"
+                        : "text-red-500"
                     }`}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
@@ -274,7 +296,7 @@ const ContactUs: FC = () => {
         </motion.div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;

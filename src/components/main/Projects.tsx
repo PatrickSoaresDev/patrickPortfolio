@@ -43,16 +43,6 @@ const Projects = ({ repos, hasGithubToken }: ProjectsProps) => {
 
   return (
     <section id="projects" className="relative py-20 overflow-hidden">
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-32 left-16 w-28 h-28 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-80 right-24 w-20 h-20 bg-teal-500/20 rounded-lg rotate-45 animate-bounce"></div>
-        <div className="absolute bottom-60 left-1/3 w-16 h-16 bg-primary/15 rounded-full animate-ping"></div>
-        <div className="absolute bottom-32 right-1/4 w-24 h-24 bg-teal-400/10 rounded-lg rotate-12 float-animation"></div>
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
-        <div className="absolute top-1/4 right-1/2 translate-x-1/2 w-96 h-96 bg-gradient-to-r from-primary/20 via-teal-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 left-1/4 w-80 h-80 bg-gradient-to-l from-teal-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
-      </div>
-
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
           className="text-center mb-16"
