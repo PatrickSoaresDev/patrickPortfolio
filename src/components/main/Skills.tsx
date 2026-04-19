@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { Skill, skills } from '@/constants'
 import SkillDataProvider from '../sub/SkillDataProvider'
+import { useLocale } from '@/contexts/LocaleContext'
 
 const uniqueSkills: Skill[] = Array.from(
   skills
@@ -17,6 +18,7 @@ const uniqueSkills: Skill[] = Array.from(
 )
 
 const Skills = () => {
+  const { t } = useLocale()
   const [showAll, setShowAll] = useState(false)
   const [maxItemsToShow, setMaxItemsToShow] = useState(12) // Default value
 
@@ -56,16 +58,16 @@ const Skills = () => {
       <div className="absolute inset-0 -z-10">
         {/* Floating Geometric Shapes */}
         <div className="absolute top-20 left-10 w-24 h-24 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute top-40 right-20 w-16 h-16 bg-blue-500/20 rounded-lg rotate-45 animate-bounce"></div>
+        <div className="absolute top-40 right-20 w-16 h-16 bg-teal-500/20 rounded-lg rotate-45 animate-bounce"></div>
         <div className="absolute bottom-32 left-1/4 w-12 h-12 bg-primary/15 rounded-full animate-ping"></div>
-        <div className="absolute bottom-20 right-1/3 w-20 h-20 bg-blue-400/10 rounded-lg rotate-12 float-animation"></div>
+        <div className="absolute bottom-20 right-1/3 w-20 h-20 bg-teal-400/10 rounded-lg rotate-12 float-animation"></div>
         
         {/* Grid Pattern */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.03)_1px,transparent_1px)] bg-[size:50px_50px]"></div>
         
         {/* Gradient Orbs */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-gradient-to-r from-primary/20 via-blue-500/10 to-transparent rounded-full blur-3xl"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-60 h-60 bg-gradient-to-l from-blue-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-80 h-80 bg-gradient-to-r from-primary/20 via-teal-500/10 to-transparent rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-60 h-60 bg-gradient-to-l from-teal-400/15 via-primary/10 to-transparent rounded-full blur-2xl"></div>
       </div>
 
       <motion.div 
@@ -77,13 +79,12 @@ const Skills = () => {
       >
         <h2
           id="skills-heading"
-          title="Technical Skills"
-          className="text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-blue-500 bg-clip-text text-transparent mb-4"
+          className="text-4xl sm:text-5xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-teal-500 bg-clip-text text-transparent mb-4"
         >
-          Technical Skills
+          {t.skills.title}
         </h2>
         <p className="text-lg text-muted-foreground font-medium">
-          A curated selection of my expertise in DevOps and Cloud Computing
+          {t.skills.subtitle}
         </p>
       </motion.div>
 
@@ -110,7 +111,7 @@ const Skills = () => {
               whileTap={{ scale: 0.95 }}
             >
               {/* Glow effect */}
-              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-primary/20 via-blue-500/10 to-transparent blur-sm"></div>
+              <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-t from-primary/20 via-teal-500/10 to-transparent blur-sm"></div>
               
               <div className="relative flex flex-col items-center gap-3 z-10">
                 <SkillDataProvider
@@ -141,12 +142,12 @@ const Skills = () => {
             className="mt-12 text-center"
           >
             <button
-              title={showAll ? 'Show Less Skills' : `Show All Skills`}
+              title={showAll ? t.skills.showLess : t.skills.showAll(uniqueSkills.length)}
               onClick={() => setShowAll(!showAll)}
-              className="group relative overflow-hidden bg-gradient-to-r from-primary to-blue-500 hover:from-blue-500 hover:to-primary text-primary-foreground px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
+              className="group relative overflow-hidden bg-gradient-to-r from-primary to-teal-500 hover:from-teal-500 hover:to-primary text-primary-foreground px-8 py-3 rounded-xl font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
             >
               <div className="relative z-10">
-                {showAll ? 'Show Less' : `Show All (${uniqueSkills.length})`}
+                {showAll ? t.skills.showLess : t.skills.showAll(uniqueSkills.length)}
               </div>
               <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
             </button>
@@ -160,7 +161,7 @@ const Skills = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-12 text-center text-base text-muted-foreground"
         >
-          …and plenty more technologies I'm exploring & mastering every day.
+          {t.skills.footer}
         </motion.p>
       </div>
     </section>

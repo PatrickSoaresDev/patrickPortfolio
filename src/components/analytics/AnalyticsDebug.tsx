@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from "react";
 
 interface AnalyticsEvent {
   id: string;
@@ -20,12 +20,12 @@ export function AnalyticsDebug() {
     const originalFetch = window.fetch;
     window.fetch = async (...args) => {
       const response = await originalFetch(...args);
-      
+
       // Check if this is an analytics tracking request
-      if (args[0] === '/api/analytics/track' && args[1]?.method === 'POST') {
+      if (args[0] === "/api/analytics/track" && args[1]?.method === "POST") {
         try {
           const body = JSON.parse(args[1].body as string);
-          setEvents(prev => [
+          setEvents((prev) => [
             {
               id: Date.now().toString(),
               event_type: body.event_type,
@@ -34,13 +34,13 @@ export function AnalyticsDebug() {
               page_path: body.page_path,
               timestamp: new Date().toLocaleTimeString(),
             },
-            ...prev.slice(0, 9) // Keep only last 10 events
+            ...prev.slice(0, 9), // Keep only last 10 events
           ]);
         } catch (e) {
-          console.error('Failed to parse analytics event:', e);
+          console.error("Failed to parse analytics event:", e);
         }
       }
-      
+
       return response;
     };
 
@@ -53,7 +53,7 @@ export function AnalyticsDebug() {
     return (
       <button
         onClick={() => setIsVisible(true)}
-        className="fixed bottom-4 left-4 z-50 bg-blue-500 text-white px-3 py-2 rounded-lg text-xs shadow-lg hover:bg-blue-600"
+        className="fixed bottom-4 left-4 z-50 bg-teal-500 text-white px-3 py-2 rounded-lg text-xs shadow-lg hover:bg-teal-600"
       >
         Show Analytics Debug
       </button>
@@ -71,11 +71,11 @@ export function AnalyticsDebug() {
           ✕
         </button>
       </div>
-      
+
       <div className="text-xs text-gray-600 mb-2">
         Events tracked: {events.length}
       </div>
-      
+
       <div className="max-h-60 overflow-y-auto space-y-1">
         {events.length === 0 ? (
           <div className="text-xs text-gray-500 italic">
@@ -83,17 +83,22 @@ export function AnalyticsDebug() {
           </div>
         ) : (
           events.map((event) => (
-            <div key={event.id} className="text-xs p-2 bg-gray-50 dark:bg-gray-700 rounded">
-              <div className="font-semibold text-blue-600">{event.event_type}</div>
+            <div
+              key={event.id}
+              className="text-xs p-2 bg-gray-50 dark:bg-gray-700 rounded"
+            >
+              <div className="font-semibold text-teal-600">
+                {event.event_type}
+              </div>
               <div className="text-gray-600 dark:text-gray-300">
-                {event.element_text || event.element_id || 'Unknown element'}
+                {event.element_text || event.element_id || "Unknown element"}
               </div>
               <div className="text-gray-400 text-xs">{event.timestamp}</div>
             </div>
           ))
         )}
       </div>
-      
+
       {events.length > 0 && (
         <button
           onClick={() => setEvents([])}

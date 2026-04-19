@@ -376,7 +376,7 @@ export default function AnalyticsPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading analytics data...</p>
         </div>
       </div>
@@ -401,7 +401,7 @@ export default function AnalyticsPage() {
                   id="token"
                   value={token}
                   onChange={(e) => setToken(e.target.value)}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                   placeholder="Enter your admin token"
                   required
                 />
@@ -411,7 +411,7 @@ export default function AnalyticsPage() {
               )}
               <button
                 type="submit"
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500"
               >
                 Access Dashboard
               </button>
@@ -434,7 +434,7 @@ export default function AnalyticsPage() {
                 setError(null);
                 localStorage.removeItem('analytics_token');
               }}
-              className="text-blue-600 hover:text-blue-800"
+              className="text-teal-600 hover:text-teal-800"
             >
               Try Again
             </button>
@@ -452,7 +452,7 @@ export default function AnalyticsPage() {
           <div className="flex gap-2">
             <button
               onClick={() => fetchData(token)}
-              className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
+              className="px-4 py-2 bg-teal-600 text-white rounded-md hover:bg-teal-700"
             >
               Refresh Data
             </button>
@@ -483,7 +483,7 @@ export default function AnalyticsPage() {
                   value={resumeUrl}
                   onChange={(e) => setResumeUrl(e.target.value)}
                   placeholder="https://docs.google.com/document/d/..."
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                 />
                 <p className="text-xs text-gray-500 mt-1">
                   Make sure the Google Doc is publicly accessible or shared with view permissions
@@ -608,7 +608,7 @@ export default function AnalyticsPage() {
                     .map(([element, count]) => (
                       <div key={element} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                         <span className="truncate text-sm">{element}</span>
-                        <span className="font-semibold text-blue-600">{count}</span>
+                        <span className="font-semibold text-teal-600">{count}</span>
                       </div>
                     ))}
                 </div>
@@ -626,7 +626,7 @@ export default function AnalyticsPage() {
                     <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                       <div className="flex-1">
                         <div className="flex items-center space-x-2">
-                          <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
+                          <span className="px-2 py-1 text-xs bg-teal-100 text-teal-800 rounded">
                             {event.event_type}
                           </span>
                           <span className="text-sm text-gray-600">{event.page_path}</span>
@@ -671,7 +671,7 @@ export default function AnalyticsPage() {
                       id="bulkEventType"
                       value={bulkDeleteEventType}
                       onChange={(e) => setBulkDeleteEventType(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     >
                       <option value="">Select event type</option>
                       {Object.keys(data.summary.eventTypes).map(eventType => (
@@ -691,7 +691,7 @@ export default function AnalyticsPage() {
                       id="bulkStartDate"
                       value={bulkDeleteStartDate}
                       onChange={(e) => setBulkDeleteStartDate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     />
                   </div>
 
@@ -704,7 +704,7 @@ export default function AnalyticsPage() {
                       id="bulkEndDate"
                       value={bulkDeleteEndDate}
                       onChange={(e) => setBulkDeleteEndDate(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     />
                   </div>
 
@@ -729,7 +729,7 @@ export default function AnalyticsPage() {
                       id="monthlyEventType"
                       value={monthlyDeleteEventType}
                       onChange={(e) => setMonthlyDeleteEventType(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     >
                       <option value="">Select event type</option>
                       {Object.keys(data.summary.eventTypes).map(eventType => (
@@ -751,7 +751,7 @@ export default function AnalyticsPage() {
                       max="12"
                       value={monthsCount}
                       onChange={(e) => setMonthsCount(parseInt(e.target.value) || 1)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500"
                     />
                   </div>
 
@@ -795,7 +795,7 @@ export default function AnalyticsPage() {
                       id="eventFilter"
                       value={eventFilter}
                       onChange={(e) => setEventFilter(e.target.value)}
-                      className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"
+                      className="px-3 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 text-sm"
                     >
                       <option value="all">All Events ({data.events.length})</option>
                       {Object.entries(data.summary.eventTypes).map(([eventType, count]) => (
@@ -824,7 +824,7 @@ export default function AnalyticsPage() {
                       {filteredEvents.map((event, index) => (
                         <tr key={index} className="border-b hover:bg-gray-50">
                           <td className="p-2">
-                            <span className="px-2 py-1 text-xs bg-blue-100 text-blue-800 rounded">
+                            <span className="px-2 py-1 text-xs bg-teal-100 text-teal-800 rounded">
                               {event.event_type}
                             </span>
                           </td>

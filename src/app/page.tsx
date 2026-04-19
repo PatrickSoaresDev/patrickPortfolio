@@ -1,8 +1,7 @@
-import { BlogsSection } from '@/components/main/Blogs'
 import ContactUs from '@/components/main/ContactUs'
 import Hero from '@/components/main/Hero'
 import Projects from '@/components/main/Projects'
-import ResumeSection from '@/components/main/Resume'
+import { fetchPortfolioRepos } from '@/lib/github-repos'
 import Skills from '@/components/main/Skills'
 import Timeline from '@/components/main/Timeline'
 import { Toaster } from 'react-hot-toast'
@@ -12,34 +11,43 @@ import { AnalyticsDebug } from '@/components/analytics/AnalyticsDebug'
 import InteractiveWrapper from '@/components/main/InteractiveWrapper'
 
 import { site, siteUrl } from '@/config/site'
+import { translations } from '@/config/translations'
+
+const seo = translations.pt.site
 
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role} | Portfolio`,
-  description: site.description,
+  title: `${site.name} — ${seo.role} | ${seo.portfolioSuffix}`,
+  description: seo.description,
   alternates: {
     canonical: siteUrl,
   },
 }
 
-export default function Home() {
+export default async function Home() {
+  const hasGithubToken = Boolean(process.env.GITHUB_TOKEN?.trim())
+  let repos: Awaited<ReturnType<typeof fetchPortfolioRepos>> = []
+  try {
+    repos = await fetchPortfolioRepos(site.githubUser)
+  } catch {
+    repos = []
+  }
+
   return (
     <div className="min-h-screen min-w-screen" >
       {/* Hidden SEO content for better indexing */}
       <div className="sr-only">
         <h1>
-          {site.name} — {site.role} portfolio
+          {site.name} — {seo.role} {seo.portfolioSuffix}
         </h1>
-        <p>{site.description}</p>
+        <p>{seo.description}</p>
       </div>
 
       <InteractiveWrapper>
         <Hero />
         <Skills />
-        <ResumeSection />
         <Timeline />
         {/* <CertificationsSection /> */}
-        <Projects />
-        <BlogsSection />
+        <Projects repos={repos} hasGithubToken={hasGithubToken} />
         <ContactUs />
         <Toaster position="bottom-right" />
       </InteractiveWrapper>

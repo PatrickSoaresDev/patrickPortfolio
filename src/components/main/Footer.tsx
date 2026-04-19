@@ -7,8 +7,11 @@ import { FaLinkedin, FaTwitter } from 'react-icons/fa'
 import { RxGithubLogo } from 'react-icons/rx'
 import { TrackableElement, TrackableContact } from '@/components/analytics/TrackableElement'
 import { site } from '@/config/site'
+import { useLocale } from '@/contexts/LocaleContext'
 
 const Footer: FC = () => {
+  const { t } = useLocale()
+
   const socialLinks = [
     {
       href: site.githubUrl,
@@ -23,16 +26,15 @@ const Footer: FC = () => {
   ]
 
   const quickLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Blogs', href: '#blogs' },
+    { name: t.footerNav.about, href: '#about' },
+    { name: t.footerNav.skills, href: '#skills' },
+    { name: t.footerNav.projects, href: '#projects' },
   ]
 
   const servicesLinks = [
-    { name: 'Backend & APIs', href: '#skills' },
-    { name: 'Plataforma & entrega', href: '#skills' },
-    { name: 'Projetos públicos', href: '#projects' },
+    { name: t.services.backend, href: '#skills' },
+    { name: t.services.platform, href: '#skills' },
+    { name: t.services.publicProjects, href: '#projects' },
   ]
 
   const containerVariants = {
@@ -54,7 +56,7 @@ const Footer: FC = () => {
 
   return (
     <footer className="relative w-full px-6 py-12 mt-20 bg-background text-foreground border-t border-border transition-colors">
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 via-blue-500 to-cyan-500" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-400" />
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
@@ -67,13 +69,13 @@ const Footer: FC = () => {
               {site.name}
             </h1>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {site.role} — {site.description}
+              {t.site.role} — {t.site.description}
             </p>
           </motion.div>
 
           <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Quick Links" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Quick Links
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              {t.footer.quickLinks}
             </h2>
             <ul className="space-y-2 text-sm">
               {quickLinks.map((item) => (
@@ -93,8 +95,8 @@ const Footer: FC = () => {
           </motion.div>
 
           <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Focus" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Focus
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              {t.footer.focus}
             </h2>
             <ul className="space-y-2 text-sm">
               {servicesLinks.map((item) => (
@@ -114,8 +116,8 @@ const Footer: FC = () => {
           </motion.div>
 
           <motion.div className="space-y-4" variants={childVariants}>
-            <h2 title="Connect" className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
-              Connect
+            <h2 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+              {t.footer.connect}
             </h2>
             <div className="flex flex-wrap gap-3">
               {socialLinks.map((link) => (
@@ -124,7 +126,7 @@ const Footer: FC = () => {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 bg-muted rounded-full hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-500 hover:text-white transition-all duration-300"
+                    className="flex items-center justify-center w-10 h-10 bg-muted rounded-full hover:bg-gradient-to-r hover:from-teal-500 hover:to-emerald-500 hover:text-white transition-all duration-300"
                     whileHover={{ scale: 1.2, rotate: 5 }}
                     aria-label={`Visit my ${link.label} profile`}
                   >
@@ -135,7 +137,7 @@ const Footer: FC = () => {
             </div>
             <div className="mt-4">
               <p className="text-xs text-muted-foreground">
-                Keywords: {site.keywords.slice(0, 8).join(', ')}
+                {t.footer.keywords}: {site.keywords.slice(0, 8).join(', ')}
               </p>
             </div>
           </motion.div>

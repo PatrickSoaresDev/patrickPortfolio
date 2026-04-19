@@ -13,22 +13,22 @@ import {
 import { ThemeToggle } from '@/hooks/use-toogle'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { FaBlog, FaBriefcase, FaCode, FaEnvelope, FaProjectDiagram, FaUser } from 'react-icons/fa'
+import { FaBriefcase, FaCode, FaEnvelope, FaProjectDiagram, FaUser } from 'react-icons/fa'
 import { Button } from '../ui/button'
 import { TrackableElement, TrackableContact } from '@/components/analytics/TrackableElement'
-import { useAnalyticsContext } from '@/components/analytics/AnalyticsProvider'
+import { LanguageSwitcher } from '@/components/LanguageSwitcher'
+import { useLocale } from '@/contexts/LocaleContext'
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const { trackClick } = useAnalyticsContext()
+  const { t } = useLocale()
 
   const navItems = [
-    { name: 'About', link: '#about', icon: <FaUser /> },
-    { name: 'Skills', link: '#skills', icon: <FaCode /> },
-    { name: 'Experience', link: '#experience', icon: <FaBriefcase /> },
-    { name: 'Projects', link: '#projects', icon: <FaProjectDiagram /> },
-    { name: 'Blogs', link: '#blogs', icon: <FaBlog /> },
+    { name: t.nav.about, link: '#about', icon: <FaUser /> },
+    { name: t.nav.skills, link: '#skills', icon: <FaCode /> },
+    { name: t.nav.experience, link: '#experience', icon: <FaBriefcase /> },
+    { name: t.nav.projects, link: '#projects', icon: <FaProjectDiagram /> },
   ]
 
   useEffect(() => {
@@ -45,11 +45,12 @@ export function Navbar() {
 
           <NavItems items={navItems} isScrolled={isScrolled} />
 
-          <div className="flex items-center gap-2">
+          <div className="relative z-[100] flex items-center gap-2">
+            <LanguageSwitcher />
             <ThemeToggle />
             <TrackableContact method="navbar-contact">
               <Button
-                title="Contact me"
+                title={t.nav.contact}
                 variant="default"
                 className="rounded-full z-50"
                 onClick={() => {
@@ -93,10 +94,13 @@ export function Navbar() {
               </TrackableElement>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <ThemeToggle />
+              <div className="flex items-center justify-between gap-2">
+                <LanguageSwitcher />
+                <ThemeToggle />
+              </div>
               <TrackableContact method="mobile-navbar-contact">
                 <Button
-                  title="Contact me"
+                  title={t.nav.contact}
                   onClick={() => {
                     setIsMobileMenuOpen(false)
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })

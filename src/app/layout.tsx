@@ -6,7 +6,9 @@ import { AnalyticsProvider } from '@/components/analytics/AnalyticsProvider'
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
+import { LocaleProvider } from '@/contexts/LocaleContext'
 import { site, siteUrl } from '@/config/site'
+import { translations } from '@/config/translations'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -18,9 +20,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
+const seo = translations.pt.site
+
 export const metadata: Metadata = {
-  title: `${site.name} — ${site.role} | Portfolio`,
-  description: site.description,
+  title: `${site.name} — ${seo.role} | ${seo.portfolioSuffix}`,
+  description: seo.description,
   keywords: [...site.keywords],
   authors: [{ name: site.name }],
   creator: site.name,
@@ -40,15 +44,15 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'pt_BR',
     url: siteUrl,
-    title: `${site.name} — ${site.role}`,
-    description: site.description,
-    siteName: `${site.name} — Portfolio`,
+    title: `${site.name} — ${seo.role}`,
+    description: seo.description,
+    siteName: `${site.name} — ${seo.portfolioSuffix}`,
     images: [
       {
         url: `${siteUrl}/profile-pic.png`,
         width: 1200,
         height: 630,
-        alt: `${site.name} — ${site.role}`,
+        alt: `${site.name} — ${seo.role}`,
       },
     ],
   },
@@ -66,8 +70,8 @@ export default function RootLayout({
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: site.name,
-    jobTitle: site.role,
-    description: site.description,
+    jobTitle: seo.role,
+    description: seo.description,
     url: siteUrl,
     image: `${siteUrl}/profile-pic.jpg`,
     sameAs: [site.githubUrl, site.linkedinUrl],
@@ -93,8 +97,8 @@ export default function RootLayout({
         />
         <link rel="canonical" href={siteUrl} />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1e40af" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#0f766e" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#115e59" media="(prefers-color-scheme: dark)" />
         <meta name="color-scheme" content="light dark" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden`}>
@@ -104,11 +108,13 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <AnalyticsProvider>
-            <Navbar />
-            <main role="main">{children}</main>
-            <Footer />
-          </AnalyticsProvider>
+          <LocaleProvider>
+            <AnalyticsProvider>
+              <Navbar />
+              <main role="main">{children}</main>
+              <Footer />
+            </AnalyticsProvider>
+          </LocaleProvider>
         </ThemeProvider>
         <Analytics />
       </body>
